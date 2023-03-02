@@ -1,0 +1,31 @@
+//time complexity : O(logn)
+//space complexity: O(1)
+//successfully executed on Leetcode
+
+class Solution {
+    public int search(ArrayReader reader, int target) {
+        int low=0;
+        int high=1;
+        
+        //finding range for target
+        while(reader.get(high)<target){
+            low=high;
+            high=2*high; 
+        }
+
+      //binary search after getting the range
+        while(low<=high){
+            int mid = low + (high-low)/2;
+            if(reader.get(mid)==target){
+                return mid;
+            }
+            if(reader.get(mid)<target){
+                low= mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+        }
+        return -1;
+    }
+}
